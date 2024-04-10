@@ -30,6 +30,7 @@ python3 -m venv env
     ```
     source env/scripts/activate
     ```
+Обновить pip:
 ```
 python3 -m pip install --upgrade pip
 ```
@@ -47,4 +48,50 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-## Примеры
+## Примеры запросов
+
+POST .../api/v1/posts/
+```
+{
+    "text": "Пост с группой",
+    "group": {{group_id}}
+}
+```
+Пример ответа:
+```
+{
+    "id": 17,
+    "author": "regular_user",
+    "text": "Пост с группой",
+    "pub_date": "2024-04-10T18:19:04.870871Z",
+    "image": null,
+    "group": 1
+}
+```
+POST .../api/v1/posts/{{post_with_group}}/comments/
+```
+{
+    "text": "Тестовый комментарий"
+}
+```
+Пример ответа:
+```
+{
+    "id": 3,
+    "author": "regular_user",
+    "text": "Тестовый комментарий",
+    "created": "2024-04-10T18:20:24.203001Z",
+    "post": 17
+}
+```
+GET .../api/v1/groups/{{group_id}}/
+
+Пример ответа:
+```
+{
+    "id": 1,
+    "title": "TestGroup",
+    "slug": "test-group",
+    "description": "Some text."
+}
+```
