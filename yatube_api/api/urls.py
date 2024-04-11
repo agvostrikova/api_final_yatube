@@ -7,12 +7,12 @@ from .views import (
 )
 
 
-router = routers.DefaultRouter()
+v1_router = routers.DefaultRouter()
 
-router.register('groups', GroupViewSet, basename='group')
-router.register('posts', PostViewSet, basename='post')
-router.register('follow', FollowViewSet, basename='follow')
-router.register(
+v1_router.register('groups', GroupViewSet, basename='group')
+v1_router.register('posts', PostViewSet, basename='post')
+v1_router.register('follow', FollowViewSet, basename='follow')
+v1_router.register(
     r'posts/(?P<post_id>\d+)/comments', CommentViewSet, basename='comment'
 )
 
@@ -22,9 +22,8 @@ urlpatterns = [
         'v1/',
         include(
             [
-                path('', include('djoser.urls')),
                 path('', include('djoser.urls.jwt')),
-                path('', include(router.urls)),
+                path('', include(v1_router.urls)),
             ]
         ),
     ),
